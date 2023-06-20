@@ -1,0 +1,26 @@
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>Login Page</h1>
+  <p>Page for users to login</p>
+  <section>
+    <a href="/">Login</a>
+    <a href="/register">Register</a>
+    <a href="/timestablegame">Times Table Game</a>
+    <a href="/leaderboard">Leaderboard</a>
+    <a href="/personalscores">Personal Highscores</a>
+  </section>
+
+  <form action="/" method="POST">
+    <input type="text" name="username" placeholder="Username" required>
+    <input type="password" name="password" placeholder="Password" required>
+    <button type="submit">Login</button>
+  </form>
+</body>
+
+</html>
