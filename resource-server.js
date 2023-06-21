@@ -5,10 +5,8 @@ const loginRouter = require('./routes/login');
 const registerRouter = require('./routes/register');
 const timestablegameRouter = require('./routes/timestablegame');
 const leaderboardRouter = require('./routes/leaderboard');
-const personalscoresRouter = require('./routes/personalscores');
 
 const identityServer = require('./identity-server/identity-server');
-const resourceServer = require('./resource-server/resource-server');
 
 const app = express();
 
@@ -20,7 +18,6 @@ app.use('/', loginRouter);
 app.use('/register', registerRouter);
 app.use('/timestablegame', timestablegameRouter);
 app.use('/leaderboard', leaderboardRouter);
-app.use('/personalscores', personalscoresRouter);
 
 app.post('/', (req, res) => {
     const { username, password } = req.body;
