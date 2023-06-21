@@ -7,7 +7,6 @@ const timestablegameRouter = require('./routes/timestablegame');
 const leaderboardRouter = require('./routes/leaderboard');
 
 const identityServer = require('./identity-server/identity-server');
-const resourceServer = require('./resource-server/resource-server');
 
 const app = express();
 
