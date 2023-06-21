@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 router.get('/', function(req, res, next) {
-  res.render('leaderboard.html', { title: 'Leaderboard' });
+  res.sendFile('leaderboard.html', { root: 'views' });
 });
 
 module.exports = router;
