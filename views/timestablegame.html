@@ -7,13 +7,99 @@
 
 <body>
   <h1>Times Table Game Main Page</h1>
-  <p>Page for users to play the game</p>
   <section>
     <a href="/">Login</a>
     <a href="/register">Register</a>
     <a href="/timestablegame">Times Table Game</a>
     <a href="/leaderboard">Leaderboard</a>
   </section>
+
+  <section id="start-game">
+    <p>Answer as many questions as you can correctly within 30 seconds.</p>
+    <button onclick="startGame('easy')">Start Easy Game</button>
+    <button onclick="startGame('medium')">Start Medium Game</button>
+    <button onclick="startGame('hard')">Start Hard Game</button>
+  </section>
+
+  <section id="game">
+    <p>Total Time : <span id="time">00</span></p>
+    <p><span id="num1">0</span> x <span id="num2">0</span> = <input id="answer" /></p>
+    <button onclick="newQuestion()">Submit Answer</button>
+  </section>
+
+  <section id="end-game">
+    <p>Congrats! Your score is: <span id="score"></span></p>
+  </section>
+
+  <script>
+
+    var score = 0
+    var time = 30
+    var timer
+    var num1
+    var num2
+    var correctAnswer
+    var offset
+    var inputAnswer = document.getElementById('answer')
+
+    inputAnswer.addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        newQuestion()
+      }
+    })
+
+    window.onload = function () {
+      document.getElementById('game').style.display = 'none'
+      document.getElementById('end-game').style.display = 'none'
+      document.getElementById('time').innerText = time
+    }
+
+    function startGame(difficulty) {
+      if (difficulty === 'easy')
+        offset = 0
+      if (difficulty === 'medium')
+        offset = 10
+      if (difficulty === 'hard')
+        offset = 20
+
+      document.getElementById('start-game').style.display = 'none'
+      document.getElementById('game').style.display = 'block'
+
+      newQuestion()
+
+      timer = setInterval(timerFunction, 1000)
+    }
+
+    function timerFunction() {
+      time--
+      document.getElementById('time').innerText = time
+
+      if (time < 1) {
+        clearInterval(timer)
+
+        document.getElementById('game').style.display = 'none'
+        document.getElementById('end-game').style.display = 'block'
+        document.getElementById('score').innerText = score
+      }
+    }
+
+    function newQuestion() {
+      var answer = Number(document.getElementById('answer').value)
+      inputAnswer.value = ""
+      inputAnswer.focus()
+
+      if (answer === correctAnswer) {
+        score++
+      }
+
+      num1 = Math.floor(Math.random() * 11) + offset
+      num2 = Math.floor(Math.random() * 11) + offset
+      document.getElementById('num1').innerText = num1
+      document.getElementById('num2').innerText = num2
+
+      correctAnswer = num1 * num2
+    }
+  </script>
 </body>
 
 </html>
