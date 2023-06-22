@@ -14,6 +14,7 @@
     overflow-y: hidden;
     overflow-x: hidden;
 }
+
 body{
     background-color: var(--background_colour);
     width: 100vw;
@@ -96,7 +97,7 @@ input[value=Login]:hover{
     border: 0.75em solid var(--background_colour_week_op);
     border-top-color: var(--loader-bg-color);
     animation: 2s infinite example-one;
-    margin: auto;
+    margin: auto; 
 }
 
 @keyframes example-one{

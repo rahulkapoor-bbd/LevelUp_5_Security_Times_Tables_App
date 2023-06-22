@@ -1,0 +1,37 @@
+:root {
+    --text_color: rgb(70, 62, 67);
+    --button-color: #3F51B5;
+    --button-hover-color:#1e2759;
+    --submit-text-color: #FFFF;
+    --background_colour: rgb(242, 237, 231);
+    --backgroung_color_inv: rgba(242, 237, 231, 0);
+    --background_colour_op: rgba(242, 237, 231, .5)
+}
+
+* {
+    padding: 0%;
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+body{
+    background-color: var(--background_colour);
+    width: 100vw;
+    height: 100vh;
+}
+
+h1{
+    margin: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    color: var(--text_color);
+    font-size: 2rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    text-align: center;
+    color: var(--text_color);
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+}
