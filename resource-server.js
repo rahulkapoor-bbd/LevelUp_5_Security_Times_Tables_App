@@ -1,21 +1,18 @@
 const express = require('express');
 const path = require('path');
 
-const loginRouter = require('./routes/login');
-const registerRouter = require('./routes/register');
 const timestablegameRouter = require('./routes/timestablegame');
 const leaderboardRouter = require('./routes/leaderboard');
 
-const identityServer = require('./identity-server/identity-server');
-
 const app = express();
+
+const port = process.env.PORT || 8080;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/', loginRouter);
-app.use('/register', registerRouter);
+
 app.use('/timestablegame', timestablegameRouter);
 app.use('/leaderboard', leaderboardRouter);
 
@@ -31,4 +28,6 @@ app.post('/', (req, res) => {
     }
 });
 
-module.exports = app;
+app.listen(port, () => {
+  console.log(`Resource server is running on port ${port}.`);
+});
