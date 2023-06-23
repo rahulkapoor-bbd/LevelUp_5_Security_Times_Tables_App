@@ -14,7 +14,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', loginRouter);
 app.use('/register', registerRouter);
 
-// Handle the login form submission
 app.post('/auth', (req, res) => {
   const { username, password } = req.body;
 

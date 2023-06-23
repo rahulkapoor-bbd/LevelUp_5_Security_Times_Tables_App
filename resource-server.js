@@ -6,6 +6,8 @@ const leaderboardRouter = require('./routes/leaderboard');
 
 const app = express();
 
+const port = process.env.PORT || 8080;
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(express.static(path.join(__dirname, 'public')));
@@ -24,4 +26,8 @@ app.post('/', (req, res) => {
     } else {
         res.render('login', { error: 'Invalid credentials' });
     }
+});
+
+app.listen(port, () => {
+  console.log(`Resource server is running on port ${port}.`);
 });
