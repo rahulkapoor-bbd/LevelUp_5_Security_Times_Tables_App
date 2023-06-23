@@ -15,7 +15,7 @@
     overflow-x: hidden;
 }
 
-body {
+body{
     background-color: var(--background_colour);
     width: 100vw;
     height: 100vh;
@@ -103,6 +103,16 @@ input[value=Login]:hover {
     cursor: pointer;
     letter-spacing: 3px;
     background-color: var(--button-hover-color);
+}
+
+#login-loader{
+    width: 2em;
+    height: 2em;
+    border-radius: 50%;
+    border: 0.75em solid var(--background_colour_week_op);
+    border-top-color: var(--loader-bg-color);
+    animation: 2s infinite example-one;
+    margin: auto; 
 }
 
 @media only screen and (max-width: 600px) {

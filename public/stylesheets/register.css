@@ -15,6 +15,7 @@
     overflow-x: hidden;
 }
 
+
 body {
     background-color: var(--background_colour);
     width: 100vw;
@@ -113,4 +114,18 @@ input[value=register]:hover {
     .register-section {
         right: 0;
     }
+  
+h1{
+    margin: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    color: var(--text_color);
+    font-size: 2rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    text-align: center;
+    color: var(--text_color);
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
 }
