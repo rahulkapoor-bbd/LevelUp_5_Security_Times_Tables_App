@@ -20,7 +20,7 @@ app.post('/auth', (req, res) => {
   const validCredentials = true;
 
   if (validCredentials) {
-    res.redirect('http://localhost:8080/timestablegame');
+    res.redirect('http://localhost:8080/playgame');
   } else {
     res.send('Invalid credentials');
   }

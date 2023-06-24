@@ -1,0 +1,103 @@
+<head>
+    <title>
+        Play Game
+    </title>
+    <link rel='stylesheet' href='/stylesheets/common.css' />
+    <link rel='stylesheet' href='/stylesheets/playgame.css' />
+</head>
+
+<nav>
+    <ul>
+        <li class="left"><a href="/playgame">Play Game</a></li>
+        <li class="left"><a href="/leaderboard">Leaderboard</a></li>
+        <li class="center">Times Table Game</li>
+        <li class="right"><a href="#" class="logout-btn">Logout</a></li>
+    </ul>
+</nav>
+
+<body>
+    <section class="settings-section">
+        <h1>Times Table Game Settings</h1>
+        <h3 id="instruction">Set the difficulty for your game:</h3>
+        <section class="dropdown">
+            <button class="dropbtn" id="difficultyBtn" onclick="toggleDropdown()">Difficulty</button>
+            <section class="dropdown-content" id="dropdownContent">
+                <a onclick="setDifficulty('Easy')">Easy</a>
+                <a onclick="setDifficulty('Medium')">Medium</a>
+                <a onclick="setDifficulty('Hard')">Hard</a>
+                <a onclick="setDifficulty('Nightmare')">Nightmare</a>
+            </section>
+        </section>
+
+        <button class="play-btn disabled" onclick="playGame()">Play Game</button>
+
+        <h4 id="difficultyDescription"></h4>
+
+    </section>
+
+    <script>
+        let selectedDifficulty = null;
+
+        function toggleDropdown() {
+            let dropdownContent = document.getElementById("dropdownContent");
+            dropdownContent.style.display = dropdownContent.style.display === "none" ? "block" : "none";
+        }
+
+        function setDifficulty(difficulty) {
+            let difficultyBtn = document.getElementById("difficultyBtn");
+            difficultyBtn.textContent = difficulty;
+
+            if (difficulty === 'Easy') {
+                difficultyBtn.style.backgroundColor = '#14FF00';
+            } else if (difficulty === 'Medium') {
+                difficultyBtn.style.backgroundColor = '#E6FF00';
+            } else if (difficulty === 'Hard') {
+                difficultyBtn.style.backgroundColor = 'orange';
+            } else if (difficulty === 'Nightmare') {
+                difficultyBtn.style.backgroundColor = 'red';
+            }
+
+            selectedDifficulty = difficulty;
+            enablePlayButton();
+            toggleDropdown();
+            updateDifficultyDescription();
+        }
+
+        function enablePlayButton() {
+            let playButton = document.querySelector(".play-btn");
+            playButton.disabled = !selectedDifficulty;
+            playButton.classList.toggle("disabled", !selectedDifficulty);
+        }
+
+        function updateDifficultyDescription() {
+            let descriptionElement = document.getElementById("difficultyDescription");
+            let descriptionText = "Select a difficulty";
+
+            switch (selectedDifficulty) {
+                case 'Easy':
+                    descriptionText = selectedDifficulty + ": Suitable for beginners";
+                    break;
+                case 'Medium':
+                    descriptionText = selectedDifficulty + ": A moderate challenge";
+                    break;
+                case 'Hard':
+                    descriptionText = selectedDifficulty + ": For experienced players";
+                    break;
+                case 'Nightmare':
+                    descriptionText = selectedDifficulty + ": Extreme difficulty level";
+                    break;
+            }
+
+            descriptionElement.textContent = descriptionText;
+        }
+
+        function playGame() {
+            if (selectedDifficulty) {
+                let route = "timestablegame?difficulty=" + encodeURIComponent(selectedDifficulty);
+                window.location.href = route;
+            }
+        }
+    </script>
+</body>
+
+</html>
