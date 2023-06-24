@@ -2,24 +2,72 @@
   <title>
     Leaderboard
   </title>
+  <link rel='stylesheet' href='/stylesheets/common.css' />
   <link rel='stylesheet' href='/stylesheets/leaderboard.css' />
 </head>
 
 <nav>
   <ul>
-    <li><a href="/">Login</a></li>
-    <li><a href="/register">Register</a></li>
-    <li><a href="/timestablegame">Times Table Game</a></li>
-    <li><a class="active" href="/leaderboard">Leaderboard</a></li>
+    <li class="left"><a href="/playgame">Play Game</a></li>
+    <li class="left"><a href="/leaderboard">Leaderboard</a></li>
+    <li class="center">Times Table Game</li>
+    <li class="right"><a href="#" class="logout-btn">Logout</a></li>
   </ul>
 </nav>
 
 <body>
-  <h1>Leaderboard Page</h1>
-  <p>Page for users to see the highest scores</p>
-  <section>
-    <a href="/timestablegame">Times Table Game</a>
+  <section class="leaderboard-section">
+    <section id="leaderboard">
+      <h2>Leaderboard</h2>
+      <div id="leaderboard-list">
+        <div class="leaderboard-entry">
+          <span class="category-title">Rank</span>
+          <span class="category-title">Name</span>
+          <span class="category-title">Score</span>
+        </div>
+      </div>
+      <div id="user-score">
+        <h3>Your Highest Score</h3>
+        <p id="user-score-value"></p>
+      </div>
+    </section> 
   </section>
+
+  <script>
+    // Example array of people's names and scores
+    const leaderboard = [
+      { name: 'John', score: 250 },
+      { name: 'Emily', score: 300 },
+      { name: 'Mark', score: 200 },
+      { name: 'Sarah', score: 350 },
+      { name: 'David', score: 400 },
+      { name: 'Olivia', score: 150 }
+    ];
+
+    // Sort the leaderboard array in descending order based on scores
+    leaderboard.sort((a, b) => b.score - a.score);
+
+    // Get the leaderboard list element
+    const leaderboardList = document.getElementById('leaderboard-list');
+
+    // Create an element for each entry and append it to the leaderboard list, limited to top 5
+    leaderboard.slice(0, 5).forEach((entry, index) => {
+      const entryElement = document.createElement('div');
+      entryElement.classList.add('leaderboard-entry');
+      entryElement.innerHTML = `<span class="rank">${index + 1}.</span>
+                            <span class="name">${entry.name}</span>
+                            <span class="score">${entry.score}</span>`;
+      leaderboardList.appendChild(entryElement);
+    });
+
+    // Example user's score
+    const userScore = 275;
+
+    // Get the user's score element
+    const userScoreElement = document.getElementById('user-score-value');
+    userScoreElement.textContent = userScore;
+
+  </script>
 </body>
 
 </html>
