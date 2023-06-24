@@ -19,40 +19,36 @@
   <section class="leaderboard-section">
     <section id="leaderboard">
       <h2>Leaderboard</h2>
-      <div id="leaderboard-list">
-        <div class="leaderboard-entry">
+      <section id="leaderboard-list">
+        <section class="leaderboard-entry">
           <span class="category-title">Rank</span>
           <span class="category-title">Name</span>
           <span class="category-title">Score</span>
-        </div>
-      </div>
-      <div id="user-score">
+        </section>
+      </section>
+      <section id="user-score">
         <h3>Your Highest Score</h3>
         <p id="user-score-value"></p>
-      </div>
+      </section>
     </section> 
   </section>
 
   <script>
-    // Example array of people's names and scores
     const leaderboard = [
-      { name: 'John', score: 250 },
-      { name: 'Emily', score: 300 },
-      { name: 'Mark', score: 200 },
-      { name: 'Sarah', score: 350 },
-      { name: 'David', score: 400 },
-      { name: 'Olivia', score: 150 }
+      { name: 'John', score: 10 },
+      { name: 'Emily', score: 15 },
+      { name: 'Mark', score: 8 },
+      { name: 'Sarah', score: 4 },
+      { name: 'David', score: 9 },
+      { name: 'Olivia', score: 2 }
     ];
 
-    // Sort the leaderboard array in descending order based on scores
     leaderboard.sort((a, b) => b.score - a.score);
 
-    // Get the leaderboard list element
     const leaderboardList = document.getElementById('leaderboard-list');
 
-    // Create an element for each entry and append it to the leaderboard list, limited to top 5
     leaderboard.slice(0, 5).forEach((entry, index) => {
-      const entryElement = document.createElement('div');
+      const entryElement = document.createElement('section');
       entryElement.classList.add('leaderboard-entry');
       entryElement.innerHTML = `<span class="rank">${index + 1}.</span>
                             <span class="name">${entry.name}</span>
@@ -63,7 +59,6 @@
     // Example user's score
     const userScore = 275;
 
-    // Get the user's score element
     const userScoreElement = document.getElementById('user-score-value');
     userScoreElement.textContent = userScore;
 

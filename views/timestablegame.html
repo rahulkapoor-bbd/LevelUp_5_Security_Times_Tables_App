@@ -26,7 +26,7 @@
 
     <section id="game">
       <section id="circle">
-        <div id="time-display">30</div>
+        <span id="time-display">30</span>
         <svg id="circle-svg">
           <circle id="circle-outline" cx="50%" cy="50%" r="50%" stroke="#000" fill="transparent"
             stroke-dasharray="0 100" />
@@ -47,14 +47,14 @@
 
 <script>
 
-  var score = 0
-  var time = 30
-  var timer
-  var num1
-  var num2
-  var correctAnswer
-  var offset
-  var inputAnswer = document.getElementById('answer')
+  let score = 0
+  let time = 30
+  let timer
+  let num1
+  let num2
+  let correctAnswer
+  let offset
+  let inputAnswer = document.getElementById('answer')
 
   inputAnswer.addEventListener("keypress", function (event) {
     if (event.key === "Enter") {
@@ -112,7 +112,7 @@
   }
 
   function newQuestion() {
-    var answer = Number(document.getElementById('answer').value)
+    let answer = Number(document.getElementById('answer').value)
     inputAnswer.value = ""
     inputAnswer.focus()
 
