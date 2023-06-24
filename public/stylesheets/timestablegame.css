@@ -1,68 +1,80 @@
-:root {
-    --text_color: rgb(70, 62, 67);
-    --nav_color: #afbbff;
-    --button-color: #3F51B5;
-    --button-hover-color:#1e2759;
-    --submit-text-color: #FFFF;
-    --background_colour: rgb(242, 237, 231);
-    --backgroung_color_inv: rgba(242, 237, 231, 0);
-    --background_colour_op: rgba(242, 237, 231, .5)
-}
-
-* {
-    padding: 0%;
-    margin: 0;
-    overflow-y: hidden;
-    overflow-x: hidden;
-}
-
-body{
-    background-color: var(--background_colour);
-    width: 100vw;
-    height: 100vh;
-}
-
-nav {
-    margin: 0;
-    padding: 0;
-}
-
-nav ul {
-    list-style-type: none;
-    display: flex;
-    justify-content: center;
-    padding: 10px;
-    background-color: var(--nav_color);
-}
-
-nav a {
-    color: var(--text_color);
-    text-decoration: none;
-    padding: 10px;
-    margin: 0 5px;
-    transition: color 0.3s ease;
-    font-family: 'Arial', sans-serif;
-}
-
-nav a:hover {
-    color: #b63333;
-}
-
-nav a.active {
-    color: #333cb6;
-}
-
-h1{
-    margin: 1rem 0rem 1rem 0rem;
+.game-section {
     text-align: center;
-    color: var(--text_color);
-    font-size: 2rem;
-    font-family: 'Raleway', sans-serif;
+    width: 40vw;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 15vh;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 3px 5px lightgray;
+    padding: 1rem;
+    background: rgba(110, 143, 145, 0.1);
 }
 
-p {
-    text-align: center;
-    color: var(--text_color);
-    font-size: 1.5rem;
-    font-family: 'Raleway', sans-serif;
+.play-btn {
+    padding: 10px 20px;
+    background-color: #4287f5;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#time-display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 24px;
+}
+
+#circle-svg {
+    width: 100%;
+    height: 100%;
+}
+
+#circle {
+    position: relative;
+    width: 75px;
+    height: 75px;
+    overflow: hidden;
+    border-radius: 50%;
+    margin: auto;
+}
+
+#circle-outline {
+    transform: rotate(270deg);
+    transform-origin: center;
+    transition: stroke-dasharray 1s linear;
+    stroke-width: 6px;
+    stroke: #6e8f91;
+    stroke-linecap: round;
+    fill: transparent;
+}
+
+#answer {
+    border: none;
+    height: 2rem;
+    width: 5rem;
+    border-radius: 6px;
+}
+
+.submit-btn {
+    padding: 5px 10px;
+    background-color: rgba(66, 135, 245, 0.8);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.leaderboard-btn {
+    padding: 10px 20px;
+    background-color: #91706E;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
 }

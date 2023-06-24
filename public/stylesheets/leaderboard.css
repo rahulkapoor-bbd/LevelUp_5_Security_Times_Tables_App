@@ -1,68 +1,76 @@
-:root {
-    --text_color: rgb(70, 62, 67);
-    --button-color: #3F51B5;
-    --nav_color: #afbbff;
-    --button-hover-color:#1e2759;
-    --submit-text-color: #FFFF;
-    --background_colour: rgb(242, 237, 231);
-    --backgroung_color_inv: rgba(242, 237, 231, 0);
-    --background_colour_op: rgba(242, 237, 231, .5)
+.leaderboard-section {
+    text-align: center;
+    width: 40vw;
+    margin: auto;
+    margin-top: auto;
+    margin-top: 15vh;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 3px 5px lightgray;
+    padding: 1rem;
+    background: rgba(110, 143, 145, 0.1);
 }
 
-* {
-    padding: 0%;
-    margin: 0;
-    overflow-y: hidden;
-    overflow-x: hidden;
+#leaderboard {
+    background-color: #f9f9f9;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Arial, sans-serif;
 }
 
-nav {
-    margin: 0;
-    padding: 0;
+#leaderboard h2 {
+    margin: 0 0 10px;
 }
 
-nav ul {
-    list-style-type: none;
+#leaderboard-list {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.leaderboard-entry {
     padding: 10px;
-    background-color: var(--nav_color);
+    border-bottom: 1px solid #ccc;
 }
 
-nav a {
-    color: var(--text_color);
-    text-decoration: none;
-    padding: 10px;
-    margin: 0 5px;
-    transition: color 0.3s ease;
-    font-family: 'Arial', sans-serif;
+.leaderboard-entry:last-child {
+    border-bottom: none;
 }
 
-nav a:hover {
-    color: #b63333;
+.leaderboard-entry .rank {
+    font-weight: bold;
+    margin-right: 10px;
 }
 
-nav a.active {
-    color: #333cb6;
+.rank {
+    float: left;
 }
 
-body{
-    background-color: var(--background_colour);
-    width: 100vw;
-    height: 100vh;
+.score {
+    float: right;
 }
 
-h1{
-    margin: 1rem 0rem 1rem 0rem;
-    text-align: center;
-    color: var(--text_color);
-    font-size: 2rem;
-    font-family: 'Raleway', sans-serif;
+.leaderboard-entry .name {
+    flex-grow: 1;
 }
 
-p {
-    text-align: center;
-    color: var(--text_color);
-    font-size: 1.5rem;
-    font-family: 'Raleway', sans-serif;
+.leaderboard-entry .score {
+    font-weight: bold;
 }
+
+.category-title {
+    font-weight: bold;
+}
+
+#user-score {
+    margin-top: 20px;
+  }
+  
+  #user-score h3 {
+    margin: 0;
+  }
+  
+  #user-score-value {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  

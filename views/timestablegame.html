@@ -3,25 +3,131 @@
     Times Table Game
   </title>
   <link rel='stylesheet' href='/stylesheets/timestablegame.css' />
+  <link rel='stylesheet' href='/stylesheets/common.css' />
 </head>
 
 <nav>
   <ul>
-    <li><a href="/">Login</a></li>
-    <li><a href="/register">Register</a></li>
-    <li><a class="active" href="/timestablegame">Times Table Game</a></li>
-    <li><a href="/leaderboard">Leaderboard</a></li>
+    <li class="left"><a href="/playgame">Play Game</a></li>
+    <li class="left"><a href="/leaderboard">Leaderboard</a></li>
+    <li class="center">Times Table Game</li>
+    <li class="right"><a href="#" class="logout-btn">Logout</a></li>
   </ul>
 </nav>
 
 <body>
-  <main>
-    <h1>Play The Game</h1>
-    <p>Page for users to play the game</p>
-    <section>
-    <a href="/leaderboard">Leaderboard</a>
+  <section class="game-section">
+    <h1>Times Table Game</h1>
+
+    <section id="start-game">
+      <p>Answer as many questions as you can correctly within 30 seconds.</p>
+      <button class="play-btn" onclick="startGame()">Start Game</button>
+    </section>
+
+    <section id="game">
+      <section id="circle">
+        <span id="time-display">30</span>
+        <svg id="circle-svg">
+          <circle id="circle-outline" cx="50%" cy="50%" r="50%" stroke="#000" fill="transparent"
+            stroke-dasharray="0 100" />
+        </svg>
+      </section>
+
+      <p><span id="num1">0</span> x <span id="num2">0</span> = <input id="answer" /></p>
+      <button onclick="newQuestion()" class="submit-btn">Submit Answer</button>
+    </section>
+
+    <section id="end-game">
+      <p>Congrats! Your score is: <span id="score"></span></p>
+      <button class="play-btn" onclick="startGame()">Play Again</button>
+      <button class="leaderboard-btn"><a href="/leaderboard">Leaderboard</a></button>
+    </section>
   </section>
-  </main>
 </body>
+
+<script>
+
+  let score = 0
+  let time = 30
+  let timer
+  let num1
+  let num2
+  let correctAnswer
+  let offset
+  let inputAnswer = document.getElementById('answer')
+
+  inputAnswer.addEventListener("keypress", function (event) {
+    if (event.key === "Enter") {
+      newQuestion()
+    }
+  })
+
+  window.onload = function () {
+    document.getElementById('game').style.display = 'none'
+    document.getElementById('end-game').style.display = 'none'
+    document.getElementById('time').innerText = time
+  }
+
+  function startGame() {
+    score = 0
+    time = 30
+
+    const urlParams = new URLSearchParams(window.location.search);
+    let difficulty = urlParams.get('difficulty');
+
+    if (difficulty === 'Easy')
+      offset = 0
+    if (difficulty === 'Medium')
+      offset = 10
+    if (difficulty === 'Hard')
+      offset = 20
+    if (difficulty === 'Nightmare')
+      offset = 30
+
+    document.getElementById('end-game').style.display = 'none'
+    document.getElementById('start-game').style.display = 'none'
+    document.getElementById('game').style.display = 'block'
+
+    newQuestion()
+
+    timer = setInterval(timerFunction, 1000)
+  }
+
+  function timerFunction() {
+    time--;
+    document.getElementById('time-display').innerText = time;
+
+    const circleOutline = document.getElementById('circle-outline');
+    const circumference = circleOutline.getTotalLength();
+    const offset = (time / 30) * circumference;
+    circleOutline.style.strokeDasharray = `${offset} ${circumference}`;
+
+    if (time < 1) {
+      clearInterval(timer)
+
+      document.getElementById('game').style.display = 'none'
+      document.getElementById('end-game').style.display = 'block'
+      document.getElementById('score').innerText = score
+    }
+  }
+
+  function newQuestion() {
+    let answer = Number(document.getElementById('answer').value)
+    inputAnswer.value = ""
+    inputAnswer.focus()
+
+    if (answer === correctAnswer) {
+      score++
+    }
+
+    num1 = Math.floor(Math.random() * 11) + offset
+    num2 = Math.floor(Math.random() * 11) + offset
+    document.getElementById('num1').innerText = num1
+    document.getElementById('num2').innerText = num2
+
+    correctAnswer = num1 * num2
+  }
+</script>
+
 
 </html>
