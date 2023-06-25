@@ -1,10 +1,12 @@
-let app = require('../resource-server');
-let http = require('http');
+import app from '../resource-server.js';
+import { createServer } from 'http';
+import { config } from 'dotenv';
+config();
 
 let port = process.env.PORT || 8080;
 app.set('port', port);
 
-let server = http.createServer(app);
+let server = createServer(app);
 
 server.listen(port);
 server.on('Error', onError);

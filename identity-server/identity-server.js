@@ -1,4 +1,4 @@
-const express = require('express');
+import express from 'express';
 const app = express();
 
 const port = process.env.PORT || 4000;
@@ -6,7 +6,7 @@ app.listen(port, () => {
   console.log(`Identity server is running on port ${port}.`);
 });
 
-function authenticate(username, password) {
+ const authenticate = (username, password) => {
   // This funtion will handle authentication
   if(username != '' && password != '')
   {
@@ -15,6 +15,6 @@ function authenticate(username, password) {
   return false;
 }
 
-module.exports = {
+export default {
   authenticate
 };

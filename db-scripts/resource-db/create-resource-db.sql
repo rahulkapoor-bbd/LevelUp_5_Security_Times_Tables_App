@@ -6,6 +6,7 @@ CREATE TABLE User(
 UserID int NOT NULL AUTO_INCREMENT,
 DifficultyID int NOT NULL,
 Username varchar(64) NOT NULL UNIQUE,
+HighScore int,
 FirstName varchar(128) NOT NULL,
 PasswordHash varchar(256) NOT NULL,
 Salt varchar(64) NOT NULL,
