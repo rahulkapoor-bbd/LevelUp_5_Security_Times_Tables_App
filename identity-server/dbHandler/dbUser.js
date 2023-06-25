@@ -38,10 +38,18 @@ async function getAllUsers() {
     return response[0];
 }
 
+async function removeCode(email) {
+    const sql = `UPDATE Users SET code = null WHERE email = ?`
+
+    const connection = await connect();
+    await connection.query(sql, [email]);
+}
+
 module.exports = {
     postUser,
     updateUser,
     getUserDetailsFromEmail,
     getUserDetailsFromCode,
     getAllUsers,
+    removeCode,
 }
