@@ -23,7 +23,7 @@ async function getUserDetailsFromEmail(email) {
 }
 
 async function getUserDetailsFromCode(code) {
-    const sql = `SELECT email FROM Users WHERE code = ?;`;
+    const sql = `SELECT email, username FROM Users WHERE code = ?;`;
 
     const connection = await connect();
     const response = await connection.query(sql, [code]);

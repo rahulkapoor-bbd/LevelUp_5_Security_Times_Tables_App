@@ -10,6 +10,8 @@ require('dotenv').config();
 
 const { postUser, getUserDetailsFromEmail, getUserDetailsFromCode, updateUser, removeCode } = require('../dbHandler/dbUser');
 
+let validCodes = [];
+
 async function generateCode(req, res) {
     const code = crypto.randomBytes(20).toString('hex');
     const { username, email, password } = req.body;
@@ -17,11 +19,12 @@ async function generateCode(req, res) {
     // add to user to db with code
     const user = await getUserDetailsFromEmail(email);
     if (user[0]) {
-        if (bcrypt.compare(`${password}${process.env.pepper}`, user[0].password)) {
+        if (await bcrypt.compare(`${password}${process.env.pepper}`, user[0].password)) {
             console.log('Updating access code');
             updateUser(email, code);
         } else {
             res.status(401);
+            res.end();
             return;
         }
 
@@ -30,21 +33,41 @@ async function generateCode(req, res) {
         postUser(username, email, hashedPassword, code);
     }
 
-    // this needs to redirect
+    validCodes.push({ code: code, time: Date.now() + 30000 });
+
+    // this needs to redirect to callback
     res.json({ code: code })
 }
 
 async function generateToken(req, res) {
     // check if valid access code and create token
     const validCode = await getUserDetailsFromCode(req.body.code);
+    let expired = true;
+    for (let i = 0; i < validCodes.length; i++) {
+        const obj = validCodes[i];
+        if (obj.code === req.body.code) {
+            if (obj.time > Date.now()) {
+                expired = false;
+            }
+            validCodes.splice(i, 1);
+            break;
+        }
+    }
 
-    if (validCode[0]) {
+    if (validCode[0] && !expired) {
 
         // , iss: process.env.issuer, aud: process.env.audience
-        const token = jwt.sign({ email: validCode[0].email }, privateKey, { expiresIn: '10m', algorithm: 'RS256' });
+        const token = jwt.sign({
+            email: validCode[0].email, username: validCode[0].username,
+            iss: process.env.issuer, aud: process.env.audience
+        }, privateKey, { expiresIn: '10m', algorithm: 'RS256' });
 
         res.json({ accessToken: token });
+        return;
     }
+
+    res.status(401);
+    res.end();
 }
 
 async function validateToken(req, res) {
