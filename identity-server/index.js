@@ -1,10 +1,10 @@
 const express = require("express");
 const bodyParser = require('body-parser');
 require('dotenv').config();
-const PORT = process.env.PORT || 4000;
+const PORT = process.env.PORT || 80;
 const app = express();
 
-const { generateCode, generateToken, validateToken } = require('./controllers/auth')
+const { generateCode, generateTokenFromCode, refreshWithAccessToken, validateToken, logoutUser } = require('./controllers/auth')
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -15,8 +15,10 @@ app.use(function (req, res, next) {
 });
 
 app.post('/identity/authorizationcode', generateCode);
-app.post('/identity/accessToken', generateToken);
-app.get('/identity/validate', validateToken);
+app.post('/identity/accessToken', generateTokenFromCode);
+app.post('/identity/refreshToken', refreshWithAccessToken);
+app.post('/identity/logout', logoutUser);
+app.post('/identity/validate', validateToken);
 
 app.listen(PORT);
 console.log(`Running at Port ${PORT}`);
