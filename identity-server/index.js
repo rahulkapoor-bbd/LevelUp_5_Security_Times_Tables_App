@@ -5,8 +5,11 @@ const PORT = process.env.PORT || 80;
 const app = express();
 
 const { registerNewUser, generateCode, generateTokenFromCode, refreshWithAccessToken, validateToken, logoutUser } = require('./controllers/auth')
+const { register, login } = require('./controllers/pages')
 
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
 app.use(function (req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
     res.header("Access-Control-Allow-Methods", "GET, POST");
@@ -20,6 +23,8 @@ app.post('/identity/accessToken', generateTokenFromCode);
 app.post('/identity/refreshToken', refreshWithAccessToken);
 app.post('/identity/logout', logoutUser);
 app.post('/identity/validate', validateToken);
+app.get('/register', register);
+app.get('/login', login);
 
 app.listen(PORT);
 console.log(`Running at Port ${PORT}`);
