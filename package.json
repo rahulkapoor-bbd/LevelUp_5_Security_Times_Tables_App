@@ -1,11 +1,14 @@
 {
   "name": "timestablegame",
+  "type": "module",
   "version": "0.0.0",
   "private": true,
   "scripts": {
     "start": "node resource-server.js"
   },
   "dependencies": {
-    "express": "^4.18.2"
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "mysql2": "^3.4.1"
   }
 }
