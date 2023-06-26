@@ -1,5 +1,5 @@
-const express = require('express');
-const path = require('path');
+import express, { json, urlencoded } from 'express';
+import { join } from 'path';
 
 const playgameRouter = require('./routes/playgame');
 const timestablegameRouter = require('./routes/timestablegame');
