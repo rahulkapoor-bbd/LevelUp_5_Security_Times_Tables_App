@@ -1,17 +1,16 @@
 import express, { json, urlencoded } from 'express';
 import { join } from 'path';
-
-const playgameRouter = require('./routes/playgame');
-const timestablegameRouter = require('./routes/timestablegame');
-const leaderboardRouter = require('./routes/leaderboard');
+import playgameRouter from './routes/playgame.js';
+import timestablegameRouter from './routes/timestablegame.js';
+import leaderboardRouter from './routes/leaderboard.js';
 
 const app = express();
 
 const port = process.env.PORT || 8080;
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(json());
+app.use(urlencoded({ extended: false }));
+app.use(express.static(join('public')));
 
 
 app.use('/playgame', playgameRouter);
