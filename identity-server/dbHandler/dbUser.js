@@ -1,18 +1,18 @@
 const { connect } = require('./dbConnection');
 
-async function postUser(username, email, password, code) {
-    const sql = `INSERT INTO Users(email, username, password, code) VALUES (?);`;
+async function postUser(username, email, password) {
+    const sql = `INSERT INTO Users(email, username, password) VALUES (?);`;
 
     const connection = await connect();
-    connection.query(sql, [[email, username, password, code]]);
+    connection.query(sql, [[email, username, password]]);
 }
 
-async function updateUser(email, code) {
-    const sql = `UPDATE Users SET code = ? WHERE email = ?;`;
-    const connection = await connect();
+// async function updateUser(email, code) {
+//     const sql = `UPDATE Users SET code = ? WHERE email = ?;`;
+//     const connection = await connect();
 
-    connection.query(sql, [[code], [email]]);
-}
+//     connection.query(sql, [[code], [email]]);
+// }
 
 async function getUserDetailsFromEmail(email) {
     const sql = `SELECT * FROM Users WHERE email = ?;`;
@@ -22,13 +22,13 @@ async function getUserDetailsFromEmail(email) {
     return response[0];
 }
 
-async function getUserDetailsFromCode(code) {
-    const sql = `SELECT email, username FROM Users WHERE code = ?;`;
+// async function getUserDetailsFromCode(code) {
+//     const sql = `SELECT email, username FROM Users WHERE code = ?;`;
 
-    const connection = await connect();
-    const response = await connection.query(sql, [code]);
-    return response[0];
-}
+//     const connection = await connect();
+//     const response = await connection.query(sql, [code]);
+//     return response[0];
+// }
 
 async function getAllUsers() {
     const sql = `SELECT * FROM Users;`;
@@ -38,18 +38,18 @@ async function getAllUsers() {
     return response[0];
 }
 
-async function removeCode(email) {
-    const sql = `UPDATE Users SET code = null WHERE email = ?`
+// async function removeCode(email) {
+//     const sql = `UPDATE Users SET code = null WHERE email = ?`
 
-    const connection = await connect();
-    await connection.query(sql, [email]);
-}
+//     const connection = await connect();
+//     await connection.query(sql, [email]);
+// }
 
 module.exports = {
     postUser,
-    updateUser,
+    // updateUser,
     getUserDetailsFromEmail,
-    getUserDetailsFromCode,
+    // getUserDetailsFromCode,
     getAllUsers,
-    removeCode,
+    // removeCode,
 }

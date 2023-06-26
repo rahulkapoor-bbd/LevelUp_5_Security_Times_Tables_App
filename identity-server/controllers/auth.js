@@ -22,7 +22,7 @@ async function generateCode(req, res) {
     if (user[0]) {
         if (await bcrypt.compare(`${password}${process.env.pepper}`, user[0].password)) {
             console.log('Updating access code');
-            updateUser(email, code);
+            // updateUser(email, code);
         } else {
             res.status(401);
             res.end();
@@ -31,9 +31,10 @@ async function generateCode(req, res) {
 
     } else {
         const hashedPassword = await bcrypt.hash(`${password}${process.env.pepper}`, 12);
-        postUser(username, email, hashedPassword, code);
+        postUser(username, email, hashedPassword);
     }
 
+    // make access code valid for 30s
     validCodes.push({ code: code, time: Date.now() + 30000 });
 
     // this needs to redirect to callback
@@ -42,7 +43,7 @@ async function generateCode(req, res) {
 
 async function generateTokenFromCode(req, res) {
     // check if valid access code and create token
-    const validCode = await getUserDetailsFromCode(req.body.code);
+    // const validCode = await getUserDetailsFromCode(req.body.code);
     let expired = true;
     for (let i = 0; i < validCodes.length; i++) {
         const obj = validCodes[i];
@@ -55,7 +56,8 @@ async function generateTokenFromCode(req, res) {
         }
     }
 
-    if (validCode[0] && !expired) {
+    // validCode[0] && 
+    if (!expired) {
         const newTokens = generateNewTokens(validCode[0].email, validCode[0].username);
         validRefreshTokens.push(newTokens.refreshToken);
         res.json(newTokens).end();
