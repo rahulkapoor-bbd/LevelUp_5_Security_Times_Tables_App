@@ -15,7 +15,8 @@
     overflow-x: hidden;
 }
 
-body{
+
+body {
     background-color: var(--background_colour);
     width: 100vw;
     height: 100vh;
@@ -36,11 +37,11 @@ body{
     height: 100%;
     width: 30%;
     background-image: url("../images/mathematics-wallpaper.jpg");
-    background-position: left;
+    background-position: right;
     background-repeat: no-repeat;
     background-size: auto;
     position: absolute;
-    left: 0;
+    right: 0;
 }
 
 #form {
@@ -48,25 +49,25 @@ body{
     display: block;
 }
 
-.login-section {
+.register-section {
     max-width: 400px;
     margin: auto;
-    left: 30%;
-    right: 0;
+    left: 0;
+    right: 30%;
     position: absolute;
     background: white;
     border-radius: 1rem;
     box-shadow: 5px 5px 5px 5px lightgray;
 }
 
-.login-card {
+.register-card {
     text-align: center;
     border-radius: 0.75rem;
     border: 0;
     box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
 }
 
-.login-header {
+.register-header {
     margin: 1rem 0rem 1rem 0rem;
     color: var(--text_color);
     font-size: 2rem;
@@ -99,20 +100,10 @@ input[type=submit] {
     transition: all .15s ease;
 }
 
-input[value=Login]:hover {
+input[value=register]:hover {
     cursor: pointer;
     letter-spacing: 3px;
     background-color: var(--button-hover-color);
-}
-
-#login-loader{
-    width: 2em;
-    height: 2em;
-    border-radius: 50%;
-    border: 0.75em solid var(--background_colour_week_op);
-    border-top-color: var(--loader-bg-color);
-    animation: 2s infinite example-one;
-    margin: auto; 
 }
 
 @media only screen and (max-width: 600px) {
@@ -120,7 +111,21 @@ input[value=Login]:hover {
         display: none;
     }
 
-    .login-section {
-        left: 0;
+    .register-section {
+        right: 0;
     }
+  
+h1{
+    margin: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    color: var(--text_color);
+    font-size: 2rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    text-align: center;
+    color: var(--text_color);
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
 }
