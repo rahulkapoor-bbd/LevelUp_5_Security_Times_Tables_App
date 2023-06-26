@@ -12,10 +12,10 @@ router.get('/:code', async function (req, res, next) {
         },
     });
 
-    // console.log(await response.json());
-    const tokens = await response.json()
-    sessionStorage.setItem('accessToken', tokens.accessToken);
-    sessionStorage.setItem('refreshToken', tokens.refreshToken);
+    const tokens = await response.json();
+    console.log(tokens);
+    // window.sessionStorage.setItem('accessToken', tokens.accessToken);
+    // window.sessionStorage.setItem('refreshToken', tokens.refreshToken);
 
     res.redirect('/playgame');
 });
