@@ -20,9 +20,11 @@ async function registerNewUser(req, res) {
 
     if (!existingUser[0]) {
         const hashedPassword = await bcrypt.hash(`${password}${process.env.pepper}`, 12);
-        postUser(username, email, hashedPassword);
+        postUser(username, '', hashedPassword);
 
-        res.status(200).end();
+        // res.status(200).end();
+        res.redirect(`http://localhost:80/login`)
+        return;
     }
     res.status(401).end();
 }
@@ -48,7 +50,8 @@ async function generateCode(req, res) {
     validCodes.push({ code: code, time: Date.now() + 30000, email: email, username: username });
 
     // this needs to redirect to callback
-    res.json({ code: code }).end();
+    res.redirect(`http://localhost:8080/callback/${code}`);
+    // res.json({ code: code }).end();
 }
 
 async function generateTokenFromCode(req, res) {

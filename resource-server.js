@@ -3,6 +3,7 @@ import { join } from 'path';
 import playgameRouter from './routes/playgame.js';
 import timestablegameRouter from './routes/timestablegame.js';
 import leaderboardRouter from './routes/leaderboard.js';
+import callback from './routes/callback.js';
 
 const app = express();
 
@@ -12,7 +13,7 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(express.static(join('public')));
 
-
+app.use('/callback', callback)
 app.use('/playgame', playgameRouter);
 app.use('/timestablegame', timestablegameRouter);
 app.use('/leaderboard', leaderboardRouter);
