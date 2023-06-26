@@ -4,7 +4,7 @@ require('dotenv').config();
 const PORT = process.env.PORT || 80;
 const app = express();
 
-const { generateCode, generateTokenFromCode, refreshWithAccessToken, validateToken, logoutUser } = require('./controllers/auth')
+const { registerNewUser, generateCode, generateTokenFromCode, refreshWithAccessToken, validateToken, logoutUser } = require('./controllers/auth')
 
 app.use(bodyParser.json());
 app.use(function (req, res, next) {
@@ -14,7 +14,8 @@ app.use(function (req, res, next) {
     next();
 });
 
-app.post('/identity/authorizationcode', generateCode);
+app.post('/identity/register', registerNewUser);
+app.post('/identity/login', generateCode);
 app.post('/identity/accessToken', generateTokenFromCode);
 app.post('/identity/refreshToken', refreshWithAccessToken);
 app.post('/identity/logout', logoutUser);

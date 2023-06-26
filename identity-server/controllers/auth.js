@@ -8,45 +8,55 @@ const privateKey = fs.readFileSync('private.key');
 
 require('dotenv').config();
 
-const { postUser, getUserDetailsFromEmail, getUserDetailsFromCode, updateUser, removeCode } = require('../dbHandler/dbUser');
+const { postUser, getUserDetailsFromUsername, existingUsername } = require('../dbHandler/dbUser');
 
 let validCodes = [];
 let validRefreshTokens = [];
+
+async function registerNewUser(req, res) {
+    const { username, email, password } = req.body;
+
+    const existingUser = await existingUsername(username);
+
+    if (!existingUser[0]) {
+        const hashedPassword = await bcrypt.hash(`${password}${process.env.pepper}`, 12);
+        postUser(username, email, hashedPassword);
+
+        res.status(200).end();
+    }
+    res.status(401).end();
+}
 
 async function generateCode(req, res) {
     const code = crypto.randomBytes(20).toString('hex');
     const { username, email, password } = req.body;
 
     // add to user to db with code
-    const user = await getUserDetailsFromEmail(email);
+    const user = await getUserDetailsFromUsername(username);
     if (user[0]) {
-        if (await bcrypt.compare(`${password}${process.env.pepper}`, user[0].password)) {
-            console.log('Updating access code');
-            // updateUser(email, code);
-        } else {
-            res.status(401);
-            res.end();
+        if (!await bcrypt.compare(`${password}${process.env.pepper}`, user[0].password)) {
+            res.status(401).end();
             return;
         }
 
     } else {
-        const hashedPassword = await bcrypt.hash(`${password}${process.env.pepper}`, 12);
-        postUser(username, email, hashedPassword);
+        res.status(401).end();
+        return;
     }
 
     // make access code valid for 30s
-    validCodes.push({ code: code, time: Date.now() + 30000 });
+    validCodes.push({ code: code, time: Date.now() + 30000, email: email, username: username });
 
     // this needs to redirect to callback
-    res.json({ code: code })
+    res.json({ code: code }).end();
 }
 
 async function generateTokenFromCode(req, res) {
-    // check if valid access code and create token
-    // const validCode = await getUserDetailsFromCode(req.body.code);
+    // check if valid access code
     let expired = true;
+    let obj;
     for (let i = 0; i < validCodes.length; i++) {
-        const obj = validCodes[i];
+        obj = validCodes[i];
         if (obj.code === req.body.code) {
             if (obj.time > Date.now()) {
                 expired = false;
@@ -56,9 +66,9 @@ async function generateTokenFromCode(req, res) {
         }
     }
 
-    // validCode[0] && 
+    // create tokens if valid access code
     if (!expired) {
-        const newTokens = generateNewTokens(validCode[0].email, validCode[0].username);
+        const newTokens = generateNewTokens(obj.email, obj.username);
         validRefreshTokens.push(newTokens.refreshToken);
         res.json(newTokens).end();
         return;
@@ -88,16 +98,15 @@ async function refreshWithAccessToken(req, res) {
         return;
     }
 
+    // create new tokens 
     try {
         const decoded = jwt.verify(refreshToken, publicKey);
 
         const newTokens = generateNewTokens(decoded.email, decoded.username);
         validRefreshTokens.push(newTokens.refreshToken);
 
-        res.status(200).json(newTokens);
-        res.end();
+        res.status(200).json(newTokens).end();
     } catch (err) {
-        // console.log(err);
         res.status(401).end();
     }
 }
@@ -105,16 +114,17 @@ async function refreshWithAccessToken(req, res) {
 async function validateToken(req, res) {
     const { token } = req.body;
 
-    // if expired need to do something to refresh
-    // console.log(jwt.decode(token, privateKey));
-
     try {
         const decoded = jwt.verify(token, publicKey);
-        // console.log(decoded);
-        res.status(200).json({ valid: true });
+
+        if (decoded.grant_type !== 'access_token') {
+            res.status(401).json({ valid: false }).end();
+            return;
+        }
+
+        res.status(200).json({ valid: true }).end();
     } catch (err) {
-        // console.log(err);
-        res.status(401).json({ valid: false });
+        res.status(401).json({ valid: false }).end();
     }
 }
 
@@ -132,7 +142,6 @@ async function logoutUser(req, res) {
         }
         res.status(200).end();
     } catch (err) {
-        // console.log(err);
         res.status(401).end();
     }
 
@@ -153,6 +162,7 @@ function generateNewTokens(email, username) {
 }
 
 module.exports = {
+    registerNewUser,
     generateCode,
     generateTokenFromCode,
     refreshWithAccessToken,
