@@ -1,4 +1,4 @@
-<head>
+</html><head>
   <title>
     Register
   </title>
@@ -6,14 +6,24 @@
 </head>
 
 <body>
-  <h1>Register Page</h1>
-  <p>Page for users to Register</p>
-  <section>
-    <a href="/">Login</a>
-    <a href="/register">Register</a>
-    <a href="/timestablegame">Times Table Game</a>
-    <a href="/leaderboard">Leaderboard</a>
-  </section>
+  <main id="page-content">
+    <section class="register-section">
+      <section class="register-card">
+        <h1 class="register-header">Register</h1>
+        <form id="form" action="/register" method="POST">
+          <input id="username" name="username" type="text" required placeholder="Username">
+          <input id="password" name="password" type="password" required placeholder="Password">
+          <input id="confirm-password" name="confirm-password" type="password" required placeholder="Confirm Password">
+          <input type="submit" value="Register" id="register-button">
+          <p class="register-text">
+            Already a member? <a href="/" style="text-decoration:none;">Login here</a>
+          </p>
+        </form>
+      </section>
+    </section>
+    <section class="image"></section>
+  </main>
+
 </body>
 
 </html>

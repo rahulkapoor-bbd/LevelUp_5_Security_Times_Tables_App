@@ -1,7 +1,7 @@
 :root {
     --text_color: rgb(70, 62, 67);
     --button-color: #3F51B5;
-    --button-hover-color:#1e2759;
+    --button-hover-color: #1e2759;
     --submit-text-color: #FFFF;
     --background_colour: rgb(242, 237, 231);
     --backgroung_color_inv: rgba(242, 237, 231, 0);
@@ -15,12 +15,106 @@
     overflow-x: hidden;
 }
 
-body{
+
+body {
     background-color: var(--background_colour);
     width: 100vw;
     height: 100vh;
 }
 
+#page-content {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.image {
+    height: 100%;
+    width: 30%;
+    background-image: url("../images/mathematics-wallpaper.jpg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    right: 0;
+}
+
+#form {
+    width: 100%;
+    display: block;
+}
+
+.register-section {
+    max-width: 400px;
+    margin: auto;
+    left: 0;
+    right: 30%;
+    position: absolute;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 5px 5px lightgray;
+}
+
+.register-card {
+    text-align: center;
+    border-radius: 0.75rem;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+.register-header {
+    margin: 1rem 0rem 1rem 0rem;
+    color: var(--text_color);
+    font-size: 2rem;
+}
+
+.register-text {
+    padding: 1rem;
+}
+
+input[type=text],
+input[type=password] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    margin-top: 10px;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: var(--button-color);
+    color: var(--submit-text-color);
+    font-weight: 600;
+    border-radius: 5px;
+
+    transition: all .15s ease;
+}
+
+input[value=register]:hover {
+    cursor: pointer;
+    letter-spacing: 3px;
+    background-color: var(--button-hover-color);
+}
+
+@media only screen and (max-width: 600px) {
+    .image {
+        display: none;
+    }
+
+    .register-section {
+        right: 0;
+    }
+  
 h1{
     margin: 1rem 0rem 1rem 0rem;
     text-align: center;
