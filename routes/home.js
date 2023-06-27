@@ -1,5 +1,6 @@
 import { Router } from 'express';
 import { invalidateToken } from '../resource-server.js'
+import fetch from 'node-fetch'
 const router = Router();
 
 router.get('/', function (req, res, next) {
