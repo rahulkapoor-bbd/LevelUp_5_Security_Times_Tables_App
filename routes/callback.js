@@ -1,10 +1,13 @@
 import { Router } from 'express';
+import { config } from 'dotenv';
+import jwt from 'jsonwebtoken';
 const router = Router();
+config();
 
 router.get('/:code', async function (req, res, next) {
     const code = req.params['code'];
 
-    const response = await fetch('http://localhost:80/identity/accessToken', {
+    const response = await fetch(`${process.env.IDENTITY_URL}/identity/accessToken`, {
         method: 'POST',
         body: `code=${code}`,
         headers: {
@@ -16,6 +19,8 @@ router.get('/:code', async function (req, res, next) {
 
     req.session.accessToken = tokens.accessToken;
     req.session.refreshToken = tokens.refreshToken;
+
+    req.session.username = jwt.decode(tokens.accessToken).username;
 
     res.redirect('/playgame');
 });

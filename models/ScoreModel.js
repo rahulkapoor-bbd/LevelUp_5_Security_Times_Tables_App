@@ -1,4 +1,4 @@
-import { pool } from '../resource-db-connection/resourceDbConnection';
+import { pool } from '../resource-db-connection/resourceDbConnection.js';
 
 class ScoreModel {
   getScores = () => {
@@ -45,11 +45,11 @@ class ScoreModel {
     });
   };
 
-  insertScore = (score) => {
+  insertScore = (scoreData) => {
     return new Promise((resolve, reject) => {
       const query =
-        'INSERT INTO Score (UserID, DifficultyID, ScoreDate, ScoreValue) VALUES (?, ?, ?, ?)';
-      const values = [score.UserID, score.DifficultyID, score.ScoreDate, score.ScoreValue];
+        'INSERT INTO Score (Username, ScoreValue) VALUES (?, ?)';
+      const values = [scoreData.username, scoreData.score];
 
       pool.query(query, values, (error, results) => {
         if (error) {

@@ -7,6 +7,10 @@ const app = express();
 const { registerNewUser, generateCode, generateTokenFromCode, refreshWithAccessToken, validateToken, logoutUser } = require('./controllers/auth')
 const { register, login } = require('./controllers/pages')
 
+const path = require('path');
+
+app.use(express.static(path.join('public')));
+
 // app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
