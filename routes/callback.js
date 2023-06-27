@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { config } from 'dotenv';
 import jwt from 'jsonwebtoken';
+import fetch from 'node-fetch';
 const router = Router();
 config();
 
