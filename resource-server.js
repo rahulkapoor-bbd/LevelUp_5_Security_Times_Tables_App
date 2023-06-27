@@ -3,11 +3,12 @@ import session from 'express-session';
 import { join } from 'path';
 import playgameRouter from './routes/playgame.js';
 import timestablegameRouter from './routes/timestablegame.js';
-import leaderboardRouter from './routes/leaderboard.js';
+// import leaderboardRouter from './routes/leaderboard.js';
 import callback from './routes/callback.js';
 import fs from 'fs';
 import jwt from 'jsonwebtoken';
 import dotenv from "dotenv";
+import fetch from 'node-fetch'
 
 dotenv.config();
 
@@ -33,7 +34,7 @@ app.use('/login', loginRouter)
 app.use('/callback', callback)
 app.use('/playgame', playgameRouter);
 app.use('/timestablegame', timestablegameRouter);
-app.use('/leaderboard', leaderboardRouter);
+// app.use('/leaderboard', leaderboardRouter);
 
 app.listen(port, () => {
   console.log(`Resource server is running on port ${port}.`);
