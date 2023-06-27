@@ -1,0 +1,191 @@
+:root {
+    --text_color: rgb(70, 62, 67);
+    --button-color: #3F51B5;
+    --button-hover-color: #1e2759;
+    --submit-text-color: #FFFF;
+    --background_colour: rgb(242, 237, 231);
+    --backgroung_color_inv: rgba(242, 237, 231, 0);
+    --background_colour_op: rgba(242, 237, 231, .5)
+}
+
+* {
+    padding: 0%;
+    margin: 0;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+
+body {
+    background-color: var(--background_colour);
+    width: 100vw;
+    height: 100vh;
+}
+
+#page-content {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Raleway', sans-serif;
+}
+
+.image {
+    height: 100%;
+    width: 30%;
+    background-image: url("../images/mathematics-wallpaper.jpg");
+    background-position: right;
+    background-repeat: no-repeat;
+    background-size: auto;
+    position: absolute;
+    right: 0;
+}
+
+#form {
+    width: 100%;
+    display: block;
+}
+
+.register-section {
+    max-width: 400px;
+    margin: auto;
+    left: 0;
+    right: 30%;
+    position: absolute;
+    background: white;
+    border-radius: 1rem;
+    box-shadow: 5px 5px 5px 5px lightgray;
+}
+
+.register-card {
+    text-align: center;
+    border-radius: 0.75rem;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+}
+
+.register-header {
+    margin: 1rem 0rem 1rem 0rem;
+    color: var(--text_color);
+    font-size: 2rem;
+}
+
+.register-text {
+    padding: 1rem;
+}
+
+input[type=text],
+input[type=password] {
+    width: 80%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 0;
+    box-shadow: 0 0 15px 4px rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+}
+
+input[type=submit] {
+    margin-top: 10px;
+    width: 50%;
+    padding: 10px;
+    border: none;
+    background-color: var(--button-color);
+    color: var(--submit-text-color);
+    font-weight: 600;
+    border-radius: 5px;
+
+    transition: all .15s ease;
+}
+
+input[value=register]:hover {
+    cursor: pointer;
+    letter-spacing: 3px;
+    background-color: var(--button-hover-color);
+}
+
+@media only screen and (max-width: 600px) {
+    .image {
+        display: none;
+    }
+
+    .register-section {
+        right: 0;
+    }
+  
+h1{
+    margin: 1rem 0rem 1rem 0rem;
+    text-align: center;
+    color: var(--text_color);
+    font-size: 2rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+p {
+    text-align: center;
+    color: var(--text_color);
+    font-size: 1.5rem;
+    font-family: 'Raleway', sans-serif;
+}
+
+/* Style all input fields */
+input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+  }
+  
+  /* Style the submit button */
+  input[type=submit] {
+    background-color: #04AA6D;
+    color: white;
+  }
+  
+  /* Style the container for inputs */
+  .container {
+    background-color: #f1f1f1;
+    padding: 20px;
+  }
+  
+  /* The message box is shown when the user clicks on the password field */
+  #message {
+    display:none;
+    background: #f1f1f1;
+    color: #000;
+    position: relative;
+    padding: 20px;
+    margin-top: 10px;
+  }
+  
+  #message p {
+    padding: 10px 35px;
+    font-size: 18px;
+  }
+  
+  /* Add a green text color and a checkmark when the requirements are right */
+  .valid {
+    color: green;
+  }
+  
+  .valid:before {
+    position: relative;
+    left: -35px;
+    content: "&#10004;";
+  }
+  
+  /* Add a red text color and an "x" icon when the requirements are wrong */
+  .invalid {
+    color: red;
+  }
+  
+  .invalid:before {
+    position: relative;
+    left: -35px;
+    content: "&#10006;";
+  }

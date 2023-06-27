@@ -11,7 +11,7 @@
     <li class="left"><a href="/playgame">Play Game</a></li>
     <li class="left"><a href="/leaderboard">Leaderboard</a></li>
     <li class="center">Times Table Game</li>
-    <li class="right"><a href="#" class="logout-btn">Logout</a></li>
+    <li class="right"><a href="/" class="logout-btn">Logout</a></li>
   </ul>
 </nav>
 
@@ -46,7 +46,6 @@
 </body>
 
 <script>
-
   let score = 0
   let time = 30
   let timer
@@ -74,15 +73,26 @@
 
     const urlParams = new URLSearchParams(window.location.search);
     let difficulty = urlParams.get('difficulty');
+    const multiplier = 1;
 
     if (difficulty === 'Easy')
       offset = 0
-    if (difficulty === 'Medium')
+
+    if (difficulty === 'Medium') {
       offset = 10
-    if (difficulty === 'Hard')
+      multiplier = 2
+    }
+      
+    if (difficulty === 'Hard') {
       offset = 20
-    if (difficulty === 'Nightmare')
+      multiplier = 3
+    }
+      
+    if (difficulty === 'Nightmare') {
       offset = 30
+      multiplier = 4
+    }
+      
 
     document.getElementById('end-game').style.display = 'none'
     document.getElementById('start-game').style.display = 'none'
@@ -104,10 +114,12 @@
 
     if (time < 1) {
       clearInterval(timer)
+      score *= multiplier
 
       document.getElementById('game').style.display = 'none'
       document.getElementById('end-game').style.display = 'block'
       document.getElementById('score').innerText = score
+      // insertScore(session.username,score)
     }
   }
 

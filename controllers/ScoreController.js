@@ -1,4 +1,4 @@
-import ScoreModel from '../models/ScoreModel';
+import ScoreModel from '../models/ScoreModel.js';
 
 const scoreModel = new ScoreModel();
 
@@ -37,13 +37,11 @@ export const getScoresByUserId = async (req, res) => {
   };
 
 
-export const insertScore = async (req, res) => {
-  const { UserID, DifficultyID, ScoreDate, ScoreValue } = req.body;
-  const score = { UserID, DifficultyID, ScoreDate, ScoreValue };
+export const insertScore = async (username, score) => {
+  const scoreData = { username, score };
 
   try {
-    const scoreId = await scoreModel.insertScore(score);
-    res.json({ scoreId });
+    const scoreId = await scoreModel.insertScore(scoreData);
   } catch (error) {
     console.error('Error inserting score:', error);
     res.status(500).json({ error: 'Failed to insert score' });
