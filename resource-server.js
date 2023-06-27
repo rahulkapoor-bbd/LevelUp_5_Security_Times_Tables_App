@@ -4,6 +4,9 @@ import playgameRouter from './routes/playgame.js';
 import timestablegameRouter from './routes/timestablegame.js';
 import leaderboardRouter from './routes/leaderboard.js';
 import callback from './routes/callback.js';
+import homeRouter from './routes/home.js';
+import registerRouter from './routes/register.js'
+import loginRouter from './routes/login.js'
 
 const app = express();
 
@@ -13,6 +16,9 @@ app.use(json());
 app.use(urlencoded({ extended: false }));
 app.use(express.static(join('public')));
 
+app.use('/', homeRouter);
+app.use('/register', registerRouter)
+app.use('/login', loginRouter)
 app.use('/callback', callback)
 app.use('/playgame', playgameRouter);
 app.use('/timestablegame', timestablegameRouter);

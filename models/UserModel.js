@@ -53,6 +53,25 @@ class UserModel {
     });
   };
 
+  getUserDifficulty = (username) => {
+    return new Promise((resolve, reject) => {
+      const query = 'SELECT DifficultyID FROM User WHERE Username = ?';
+      const values = [username];
+
+      pool.query(query, values, (error, results) => {
+        if (error) {
+          reject(error);
+        } else {
+          if (results.length > 0) {
+            resolve(results[0]);
+          } else {
+            resolve(null);
+          }
+        }
+      });
+    });
+  };
+
   insertUser = (user) => {
     return new Promise((resolve, reject) => {
       const query = 'INSERT INTO User (DifficultyID, Username, HighScore, FirstName, PasswordHash, Salt) VALUES (?, ?, ?, ?, ?, ?)';
