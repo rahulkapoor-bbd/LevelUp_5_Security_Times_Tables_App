@@ -21,15 +21,15 @@ We use Nodejs for our environment and backend, please install Nodejs here:
 
 ### Create a .env file in the root directory with the following contents:
 
-DB_HOST=timestable-db.cdpckwejswol.us-east-1.rds.amazonaws.com
-DB_PORT=3306
-DB_USER=standardUser
-DB_PASSWORD=c9YroMrb56VmlseaJ
+DB_HOST=http:localhost
+DB_PORT=//Your port
+DB_USER=//Your Db username
+DB_PASSWORD=//Your DB password
 DB_NAME=TimesTableApp
-IDENTITY_URL_REGISTER=https://d1fqjvsk8qffh8.cloudfront.net/register
-IDENTITY_URL_LOGIN=https://d1fqjvsk8qffh8.cloudfront.net/login
-SESSION_SECRET = lfgudfvY3X7fs6iduhL0Ph7XO
-IDENTITY_URL=https://d1fqjvsk8qffh8.cloudfront.net
+IDENTITY_URL_REGISTER=http://localhost/register
+IDENTITY_URL_LOGIN=http://localhost/login
+SESSION_SECRET = //Your session secret
+IDENTITY_URL=https://localhost
 
 ## For Identity Server
 
