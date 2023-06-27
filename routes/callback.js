@@ -13,9 +13,9 @@ router.get('/:code', async function (req, res, next) {
     });
 
     const tokens = await response.json();
-    console.log(tokens);
-    // window.sessionStorage.setItem('accessToken', tokens.accessToken);
-    // window.sessionStorage.setItem('refreshToken', tokens.refreshToken);
+
+    req.session.accessToken = tokens.accessToken;
+    req.session.refreshToken = tokens.refreshToken;
 
     res.redirect('/playgame');
 });

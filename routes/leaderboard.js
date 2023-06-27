@@ -1,8 +1,23 @@
 import { Router } from 'express';
+import { validateToken } from '../resource-server.js';
+
 const router = Router();
 
-router.get('/', function(req, res, next) {
-  res.sendFile('leaderboard.html', { root: 'views' });
+router.get('/', function (req, res, next) {
+  const accessToken = req.session.accessToken;
+  const refreshToken = req.session.refreshToken;
+
+  const validate = validateToken(accessToken);
+
+  if (validate) {
+    console.log(validate.username);
+
+    res.sendFile('leaderboard.html', { root: 'views' });
+  }
+  else {
+    res.status(401).end();
+    return;
+  }
 });
 
 export default router;
