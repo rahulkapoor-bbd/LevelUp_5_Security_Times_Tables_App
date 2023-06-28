@@ -21,27 +21,27 @@ We use Nodejs for our environment and backend, please install Nodejs here:
 
 ### Create a .env file in the root directory with the following contents:
 
-DB_HOST=http:localhost
-DB_PORT=//Your port
-DB_USER=//Your Db username
-DB_PASSWORD=//Your DB password
-DB_NAME=TimesTableApp
-IDENTITY_URL_REGISTER=http://localhost/register
-IDENTITY_URL_LOGIN=http://localhost/login
-SESSION_SECRET = //Your session secret
-IDENTITY_URL=https://localhost
+DB_HOST=http:localhost  
+DB_PORT=//Your port  
+DB_USER=//Your Db username  
+DB_PASSWORD=//Your DB password  
+DB_NAME=TimesTableApp  
+IDENTITY_URL_REGISTER=http://localhost/register  
+IDENTITY_URL_LOGIN=http://localhost/login  
+SESSION_SECRET = //Your session secret  
+IDENTITY_URL=https://localhost  
 
 ## For Identity Server
 
 ### ### Create a .env file in the /identity-server directory with the following contents:
-dbHost=
-dbUser=
-dbPassword=
-issuer=
-audience=
-pepper=
-PORT=
-resourceServerCallback=
+dbHost=  
+dbUser=  
+dbPassword=  
+issuer=  
+audience=  
+pepper=  
+PORT=  
+resourceServerCallback=  
 
 ### Public and private key
 You must have openssl installed
