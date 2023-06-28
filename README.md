@@ -34,9 +34,14 @@ IDENTITY_URL=https://localhost
 ## For Identity Server
 
 ### ### Create a .env file in the /identity-server directory with the following contents:
-dbHost=  
-dbUser=  
-dbPassword=  
+dbHost=
+dbUser=
+dbPassword=
+issuer=
+audience=
+pepper=
+PORT=
+resourceServerCallback=
 
 ### Public and private key
 You must have openssl installed
