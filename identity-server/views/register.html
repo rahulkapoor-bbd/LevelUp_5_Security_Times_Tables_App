@@ -12,7 +12,7 @@
         <h1 class="login-header">Register</h1>
         <form id="form" action="/identity/register" method="POST">
           <input id="username" name="username" type="text" required placeholder="Username">
-          <input type="password" id="psw" name="psw" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Password">
+          <input type="password" id="psw" name="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required placeholder="Password">
           <input type="submit" value="Register" id="login-button">
           <section id="login-loader" class="loader hidden"></section>
           <p class="register-text">
